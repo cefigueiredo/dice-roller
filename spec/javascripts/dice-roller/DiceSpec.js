@@ -94,6 +94,23 @@ describe("dice-roller dice", function() {
           expect(faces[i]).toBeGreaterThan(0, "face " + i + " should have appeared, but it didn't")
         }
       })
+
+      it("generates a normally distributed random number", function() {
+        var faces = {}, face
+
+        for (var i = 0; i < 10000; i++) {
+          face = dice.randomizeFace()
+
+          faces[face] = (faces[face] || 0) + 1
+        }
+
+        for (i = 1; i <= sides; i++) {
+          var dist = faces[i]/10000
+
+          expect(dist).toBeGreaterThan(1/sides - 0.01)
+          expect(dist).toBeLessThan(1/sides + 0.01)
+        }
+      })
     })
 
     describe("generateFaces", function () {
@@ -232,6 +249,23 @@ describe("dice-roller dice", function() {
 
         for (i = 1; i <= sides; i++) {
           expect(faces[i]).toBeGreaterThan(0, "face " + i + " should have appeared, but it didn't")
+        }
+      })
+
+      it("generates a normally distributed random number", function() {
+        var faces = {}, face
+
+        for (var i = 0; i < 10000; i++) {
+          face = dice.randomizeFace()
+
+          faces[face] = (faces[face] || 0) + 1
+        }
+
+        for (i = 1; i <= sides; i++) {
+          var dist = faces[i]/10000
+
+          expect(dist).toBeGreaterThan(1/sides - 0.01)
+          expect(dist).toBeLessThan(1/sides + 0.01)
         }
       })
     })
